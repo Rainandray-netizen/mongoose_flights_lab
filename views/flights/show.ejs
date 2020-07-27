@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <% include navbar%>
+  <h1><%= `${flight.airline} airlines ${flight.flightNo}` %></h1>
+  <h2>Departs from <%= `${flight.airport} at ${flight.departs}` %></h2>
+  <h2>Destinations:</h2>
+  <% flight.destination.forEach((dest)=>{ %>
+    <h5><%= `${dest.airport} at ${dest.arrives}` %></h5>
+  <% }) %> 
+  <form action='/flights/<%= flight._id %>/destination' method='POST'>
+    <label>Airport:
+      <select name="airport">
+        <option value="DEN">DEN</option>
+        <option value="LAX">LAX</option>
+        <option value="AUS">AUS</option>
+        <option value="DFW">DFW</option>
+        <option value="SAN">SAN</option>
+      </select>
+    </label>
+    <label>Arrives:
+      <input type="datetime-local" name="arrives">
+    </label>
+    <button>Submit</button>
+  </form>
+</body>
+</html>
