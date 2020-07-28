@@ -10,9 +10,17 @@
   <h1><%= `${flight.airline} airlines ${flight.flightNo}` %></h1>
   <h2>Departs from <%= `${flight.airport} at ${flight.departs}` %></h2>
   <h2>Destinations:</h2>
-  <% flight.destination.forEach((dest)=>{ %>
+  <% flight.destination && flight.destination.forEach((dest)=>{ %>
     <h5><%= `${dest.airport} at ${dest.arrives}` %></h5>
   <% }) %> 
+  <h2>Tickets: </h2>
+  <% tickets && tickets.forEach((ticket)=>{ %>
+    <p><%= `${ticket.seat} for ${ticket.price}`%></p>
+  <% }) %>
+  <form action='/flights/<%= flight._id %>/ticket'>
+    <button type="submit">Add New Ticket</button>
+  </form>
+  <h2>Add a new Destination</h2>
   <form action='/flights/<%= flight._id %>/destination' method='POST'>
     <label>Airport:
       <select name="airport">
@@ -24,7 +32,7 @@
       </select>
     </label>
     <label>Arrives:
-      <input type="datetime-local" name="arrives">
+      <input type='datetime-local' name='arrives'>
     </label>
     <button>Submit</button>
   </form>

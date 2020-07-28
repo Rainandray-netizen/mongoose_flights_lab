@@ -1,4 +1,5 @@
 const Flight = require('../models/flight.model')
+const Ticket = require('../models/ticket.model')
 
 const newFlight = (req, res) => {
   res.render('flights/new')
@@ -49,23 +50,12 @@ const show = (req, res) => {
       console.log(err)
       res.redirect('/flights')
     }
-    res.render('flights/show', { flight })
+    Ticket.find({ flight: req.params.id }).then(tickets => {
+      console.log('Tickets: ', tickets)
+      res.render('flights/show', { flight, tickets })
+    })
   })
 }
-
-// const show = (req, res) => {
-//   Flight.findById(req.params.id, (err, flight) => {
-//     if (err) {
-//       console.log(err);
-//       return res.redirect('/flights');
-//     }
-//     Ticket.find({ flight: req.params.id }).then(tickets => {
-//       console.log('ticktes ', tickets, req.params.id);
-//       let title = `${flight.airline} ${flight.flightNo}`;
-//       res.render('flights/show', { title, flight, tickets });
-//     });
-//   });
-// };
 
 module.exports = {
   new:newFlight,

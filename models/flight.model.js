@@ -15,7 +15,8 @@ const flightSchema = new Schema({
   airport: String,
   flightNo: Number,
   departs: Date,
-  destination: [destinationSchema]
+  destination: [destinationSchema],
+  tickets: [Schema.Types.ObjectId],
 })
 
 module.exports = model('Flight',flightSchema)
